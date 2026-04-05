@@ -1,37 +1,126 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ly Xinh Shop</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<body class="bg-stone-100 text-stone-800">
 
-<body class="bg-gray-100">
+  <!-- Header -->
+  <header class="bg-orange-500 text-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
+      <h1 class="text-2xl font-bold">☕ Ly Xinh Shop</h1>
 
-<!-- 🔥 NAVBAR -->
-<div class="bg-orange-500 text-white p-4 flex justify-between items-center">
-  <h1 class="text-xl font-bold">🛍️ Ly Xinh Shop</h1>
+      <div class="flex-1 max-w-2xl">
+        <input
+          id="search"
+          type="text"
+          placeholder="Tìm ly sứ, ly giữ nhiệt, ly cafe..."
+          class="w-full px-4 py-3 rounded-xl text-black outline-none"
+          oninput="renderProducts()"
+        />
+      </div>
 
-  <input id="search" placeholder="Tìm ly..."
-    class="p-2 rounded text-black w-1/2"
-    oninput="renderProducts()" />
+      <a href="cart.html" class="bg-white text-orange-500 font-semibold px-4 py-2 rounded-xl shadow hover:scale-105 transition">
+        🛒 (<span id="cart-count">0</span>)
+      </a>
+    </div>
+  </header>
 
-  <a href="cart.html" class="bg-white text-orange-500 px-3 py-2 rounded">
-    🛒 (<span id="cart-count">0</span>)
-  </a>
-</div>
+  <!-- Hero -->
+  <section class="max-w-7xl mx-auto px-6 mt-6">
+    <div class="bg-gradient-to-r from-orange-100 to-amber-50 rounded-3xl p-8 md:p-12 grid md:grid-cols-2 items-center gap-8 shadow-sm">
+      <div>
+        <p class="inline-block bg-orange-500 text-white px-4 py-1 rounded-full text-sm font-semibold mb-4">
+          Sale tuần này
+        </p>
+        <h2 class="text-4xl font-bold leading-tight mb-4">
+          Chọn chiếc ly đẹp để mỗi ngày uống nước vui hơn
+        </h2>
+        <p class="text-stone-600 mb-6">
+          Bộ sưu tập ly sứ, ly thủy tinh và ly giữ nhiệt với phong cách tối giản, dễ thương và hiện đại.
+        </p>
+        <div class="flex gap-3 flex-wrap">
+          <a href="#products" class="bg-orange-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-orange-600 transition">
+            Mua ngay
+          </a>
+          <a href="#features" class="bg-white px-6 py-3 rounded-xl font-semibold shadow hover:shadow-md transition">
+            Xem ưu đãi
+          </a>
+        </div>
+      </div>
 
-<!-- 🎯 BANNER -->
-<div class="p-5">
-  <div class="bg-white rounded-xl shadow p-5 text-center">
-    <h2 class="text-2xl font-bold mb-2">🔥 Sale 50% tất cả ly</h2>
-    <p>Trang trí bàn làm việc cực chill ☕</p>
-  </div>
-</div>
+      <div>
+        <img
+          src="https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=1200&q=80"
+          alt="Bộ ly đẹp"
+          class="w-full h-[320px] object-cover rounded-3xl shadow"
+        />
+      </div>
+    </div>
+  </section>
 
-<!-- 🛒 PRODUCT -->
-<div id="product-list" class="grid grid-cols-4 gap-4 p-5"></div>
+  <!-- Features -->
+  <section id="features" class="max-w-7xl mx-auto px-6 mt-6 grid md:grid-cols-3 gap-4">
+    <div class="bg-white rounded-2xl p-5 shadow-sm">
+      <h3 class="font-bold text-lg mb-1">🚚 Giao hàng nhanh</h3>
+      <p class="text-stone-600">Miễn phí đơn từ 299.000đ</p>
+    </div>
+    <div class="bg-white rounded-2xl p-5 shadow-sm">
+      <h3 class="font-bold text-lg mb-1">🔄 Đổi trả dễ dàng</h3>
+      <p class="text-stone-600">Hỗ trợ đổi trả trong 7 ngày</p>
+    </div>
+    <div class="bg-white rounded-2xl p-5 shadow-sm">
+      <h3 class="font-bold text-lg mb-1">⭐ Hàng được yêu thích</h3>
+      <p class="text-stone-600">Mẫu đẹp, dễ dùng, hợp decor bàn làm việc</p>
+    </div>
+  </section>
 
-<script src="script.js"></script>
+  <!-- Categories -->
+  <section class="max-w-7xl mx-auto px-6 mt-8">
+    <h2 class="text-2xl font-bold mb-4">Danh mục nổi bật</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="bg-white rounded-2xl p-5 text-center shadow-sm hover:shadow-md transition">☕ Ly sứ</div>
+      <div class="bg-white rounded-2xl p-5 text-center shadow-sm hover:shadow-md transition">🥤 Ly thủy tinh</div>
+      <div class="bg-white rounded-2xl p-5 text-center shadow-sm hover:shadow-md transition">🔥 Ly giữ nhiệt</div>
+      <div class="bg-white rounded-2xl p-5 text-center shadow-sm hover:shadow-md transition">🎁 Quà tặng</div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section id="products" class="max-w-7xl mx-auto px-6 mt-8 mb-12">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-2xl font-bold">Sản phẩm nổi bật</h2>
+      <p class="text-stone-500">Chọn chiếc ly bạn thích nhất</p>
+    </div>
+
+    <div id="product-list" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-stone-900 text-stone-300 py-10">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+      <div>
+        <h3 class="text-white text-xl font-bold mb-3">Ly Xinh Shop</h3>
+        <p>Ly đẹp cho góc làm việc, góc học tập và những món quà nhỏ dễ thương.</p>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold mb-3">Hỗ trợ</h4>
+        <p>Giao hàng toàn quốc</p>
+        <p>Đổi trả 7 ngày</p>
+        <p>Hotline: 0123 456 789</p>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold mb-3">Theo dõi shop</h4>
+        <p>Facebook</p>
+        <p>Instagram</p>
+        <p>TikTok</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

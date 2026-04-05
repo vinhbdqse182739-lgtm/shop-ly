@@ -1,21 +1,30 @@
 const products = [
   {
     id: 1,
-    name: "Ly sứ trắng",
+    name: "Ly sứ trắng tối giản",
     price: 50000,
-    img: "https://images.unsplash.com/photo-1580910051074-3eb694886505"
+    oldPrice: 79000,
+    rating: 4.8,
+    badge: "Bán chạy",
+    img: "https://images.unsplash.com/photo-1577937927133-66ef06acdf18?auto=format&fit=crop&w=800&q=80"
   },
   {
     id: 2,
-    name: "Ly thủy tinh",
+    name: "Ly thủy tinh phong cách Hàn",
     price: 70000,
-    img: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec"
+    oldPrice: 99000,
+    rating: 4.7,
+    badge: "Mới",
+    img: "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=800&q=80"
   },
   {
     id: 3,
-    name: "Ly giữ nhiệt",
+    name: "Ly giữ nhiệt cao cấp",
     price: 120000,
-    img: "https://images.unsplash.com/photo-1590080877777-52d6f9c7e9b5"
+    oldPrice: 159000,
+    rating: 4.9,
+    badge: "Sale 25%",
+    img: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80"
   }
 ];
 
@@ -26,7 +35,8 @@ function saveCart() {
 }
 
 function updateCartCount() {
-  document.getElementById("cart-count").innerText = cart.length;
+  const el = document.getElementById("cart-count");
+  if (el) el.innerText = cart.length;
 }
 
 function addToCart(id) {
@@ -34,37 +44,52 @@ function addToCart(id) {
   cart.push(product);
   saveCart();
   updateCartCount();
-  alert("Đã thêm vào giỏ!");
+  alert("Đã thêm vào giỏ hàng");
 }
 
 function renderProducts() {
   const list = document.getElementById("product-list");
-  const keyword = document.getElementById("search").value.toLowerCase();
+  if (!list) return;
 
+  const keyword = document.getElementById("search").value.toLowerCase();
   list.innerHTML = "";
 
-  products
-    .filter(p => p.name.toLowerCase().includes(keyword))
-    .forEach(p => {
-      list.innerHTML += `
-        <div class="bg-white p-4 rounded-xl shadow hover:scale-105 transition duration-300">
-          
-          <img src="${p.img}" class="w-full h-40 object-cover rounded mb-2">
+  const filtered = products.filter(product =>
+    product.name.toLowerCase().includes(keyword)
+  );
 
-          <h3 class="font-bold">${p.name}</h3>
+  filtered.forEach(product => {
+    list.innerHTML += `
+      <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300">
+        <div class="relative">
+          <img src="${product.img}" alt="${product.name}" class="w-full h-64 object-cover">
+          <span class="absolute top-4 left-4 bg-orange-500 text-white text-sm font-semibold px-3 py-1 rounded-full">
+            ${product.badge}
+          </span>
+        </div>
 
-          <p class="text-orange-500 font-bold">${p.price.toLocaleString()}đ</p>
+        <div class="p-5">
+          <div class="text-sm text-amber-500 mb-2">⭐ ${product.rating} / 5</div>
+          <h3 class="text-xl font-bold mb-2">${product.name}</h3>
 
-          <button onclick="addToCart(${p.id})"
-            class="bg-orange-500 hover:bg-orange-600 text-white px-3 py-1 mt-2 rounded w-full">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-2xl font-bold text-orange-500">${product.price.toLocaleString()}đ</span>
+            <span class="text-stone-400 line-through">${product.oldPrice.toLocaleString()}đ</span>
+          </div>
+
+          <button
+            onclick="addToCart(${product.id})"
+            class="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-xl font-semibold transition"
+          >
             Thêm vào giỏ
           </button>
         </div>
-      `;
-    });
+      </div>
+    `;
+  });
 
   updateCartCount();
 }
 
-// chạy
 renderProducts();
+updateCartCount();
