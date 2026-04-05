@@ -73,6 +73,11 @@ function renderProducts() {
 function getTotal() {
   return cart.reduce((sum, item) => sum + item.price, 0);
 }
+function removeItem(index) {
+  cart.splice(index, 1);
+  saveCart();
+  renderCart();
+}
 
 // chạy
 renderProducts();
