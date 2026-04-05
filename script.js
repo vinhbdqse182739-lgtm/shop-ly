@@ -124,3 +124,38 @@ function renderProducts() {
 
 renderProducts();
 updateCartCount();
+function getCurrentUser() {
+  return JSON.parse(localStorage.getItem("currentUser")) || null;
+}
+
+function logout() {
+  localStorage.removeItem("currentUser");
+  window.location.reload();
+}
+
+function renderAuthArea() {
+  const authArea = document.getElementById("auth-area");
+  if (!authArea) return;
+
+  const currentUser = getCurrentUser();
+
+  if (currentUser) {
+    authArea.innerHTML = `
+      <span class="font-medium text-gray-700">Xin chào, ${currentUser.name}</span>
+      <button onclick="logout()" class="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-xl font-medium transition">
+        Đăng xuất
+      </button>
+    `;
+  } else {
+    authArea.innerHTML = `
+      <a href="login.html" class="bg-white border border-gray-200 px-4 py-2 rounded-xl font-medium hover:bg-gray-100 transition">
+        Đăng nhập
+      </a>
+      <a href="register.html" class="bg-orange-500 text-white px-4 py-2 rounded-xl font-medium hover:bg-orange-600 transition">
+        Đăng ký
+      </a>
+    `;
+  }
+}
+
+renderAuthArea();
