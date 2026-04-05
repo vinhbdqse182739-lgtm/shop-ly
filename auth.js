@@ -88,3 +88,52 @@ if (loginForm) {
     }, 1000);
   });
 }
+// Quên mật khẩu
+const forgotPasswordForm = document.getElementById("forgotPasswordForm");
+if (forgotPasswordForm) {
+  forgotPasswordForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById("forgotEmail").value.trim();
+    const newPassword = document.getElementById("newPassword").value.trim();
+    const confirmPassword = document.getElementById("confirmPassword").value.trim();
+    const message = document.getElementById("forgotMessage");
+
+    if (!email || !newPassword || !confirmPassword) {
+      message.innerText = "Vui lòng nhập đầy đủ thông tin";
+      message.className = "text-center mt-4 font-medium text-red-500";
+      return;
+    }
+
+    if (newPassword.length < 6) {
+      message.innerText = "Mật khẩu mới phải có ít nhất 6 ký tự";
+      message.className = "text-center mt-4 font-medium text-red-500";
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      message.innerText = "Mật khẩu nhập lại không khớp";
+      message.className = "text-center mt-4 font-medium text-red-500";
+      return;
+    }
+
+    const users = getUsers();
+    const userIndex = users.findIndex(user => user.email === email);
+
+    if (userIndex === -1) {
+      message.innerText = "Email này chưa được đăng ký";
+      message.className = "text-center mt-4 font-medium text-red-500";
+      return;
+    }
+
+    users[userIndex].password = newPassword;
+    saveUsers(users);
+
+    message.innerText = "Đổi mật khẩu thành công! Đang quay lại trang đăng nhập...";
+    message.className = "text-center mt-4 font-medium text-green-600";
+
+    setTimeout(() => {
+      window.location.href = "login.html";
+    }, 1500);
+  });
+}
