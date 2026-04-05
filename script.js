@@ -148,7 +148,7 @@ function renderAuthArea() {
     `;
   } else {
     authArea.innerHTML = `
-      <a href="login.html" class="bg-white border border-gray-200 px-4 py-2 rounded-xl font-medium hover:bg-gray-100 transition">
+      <a href="login.html" class="bg-white text-orange-500 border border-white px-4 py-2 rounded-xl font-semibold hover:bg-orange-50 transition shadow-sm">
         Đăng nhập
       </a>
       <a href="register.html" class="bg-orange-500 text-white px-4 py-2 rounded-xl font-medium hover:bg-orange-600 transition">
