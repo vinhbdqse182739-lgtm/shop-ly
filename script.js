@@ -78,6 +78,11 @@ function removeItem(index) {
   saveCart();
   renderCart();
 }
+function renderTotal() {
+  document.getElementById("total").innerText =
+    "Tổng: " + getTotal().toLocaleString() + "đ";
+}
+renderTotal();
 
 // chạy
 renderProducts();
